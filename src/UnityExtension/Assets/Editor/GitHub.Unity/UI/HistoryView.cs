@@ -114,7 +114,6 @@ namespace GitHub.Unity
 
         public override void OnGUI()
         {
-
             OnEmbeddedGUI();
         }
 
@@ -122,6 +121,7 @@ namespace GitHub.Unity
         {
             get { return isBusy; }
         }
+
         private void AttachHandlers(IRepository repository)
         {
             if (repository == null)
