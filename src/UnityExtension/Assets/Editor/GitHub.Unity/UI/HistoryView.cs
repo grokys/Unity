@@ -120,6 +120,8 @@ namespace GitHub.Unity
         public override bool IsBusy
         {
             get { return isBusy; }
+        }
+
         private void AttachHandlers(IRepository repository)
         {
             if (repository == null)

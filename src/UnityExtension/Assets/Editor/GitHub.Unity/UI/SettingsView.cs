@@ -174,22 +174,26 @@ namespace GitHub.Unity
             if (Repository == null)
                 return;
 
-            if (!remoteHasChanged)
-                return;
+            if (remoteHasChanged)
+            {
+                remoteHasChanged = false;
 
-            remoteHasChanged = false;
-            var activeRemote = Repository.CurrentRemote;
-            hasRemote = activeRemote.HasValue && !String.IsNullOrEmpty(activeRemote.Value.Url);
-            if (!hasRemote)
-            {
-                repositoryRemoteName = DefaultRepositoryRemoteName;
-                newRepositoryRemoteUrl = repositoryRemoteUrl = string.Empty;
+                var activeRemote = Repository.CurrentRemote;
+                hasRemote = activeRemote.HasValue && !String.IsNullOrEmpty(activeRemote.Value.Url);
+
+                if (!hasRemote)
+                {
+                    repositoryRemoteName = DefaultRepositoryRemoteName;
+                    newRepositoryRemoteUrl = repositoryRemoteUrl = string.Empty;
+                }
+                else
+                {
+                    repositoryRemoteName = activeRemote.Value.Name;
+                    newRepositoryRemoteUrl = repositoryRemoteUrl = activeRemote.Value.Url;
+                }
             }
-            else
-            {
-                repositoryRemoteName = activeRemote.Value.Name;
-                newRepositoryRemoteUrl = repositoryRemoteUrl = activeRemote.Value.Url;
-            }
+        }
+
         private void Repository_OnActiveRemoteChanged(string remote)
         {
             remoteHasChanged = true;

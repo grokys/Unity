@@ -1,11 +1,8 @@
 #pragma warning disable 649
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace GitHub.Unity
 {
@@ -16,18 +13,16 @@ namespace GitHub.Unity
         private const string NoRepoDescription = "Initialize a Git repository to track changes and collaborate with others.";
 
         [SerializeField] private bool isBusy;
-        [SerializeField] private bool isPublished;
-
-        public override void OnDataUpdate()
-        {
-            base.OnDataUpdate();
-            MaybeUpdateData();
-        }
 
         public override void OnRepositoryChanged(IRepository oldRepository)
         {
             base.OnRepositoryChanged(oldRepository);
             Refresh();
+        }
+
+        public override bool IsBusy
+        {
+            get { return isBusy; }
         }
 
         public override void OnGUI()
@@ -88,11 +83,6 @@ namespace GitHub.Unity
                 GUILayout.FlexibleSpace();
             }
             GUILayout.EndVertical();
-        }
-
-        private void MaybeUpdateData()
-        {
-            isPublished = Repository != null && Repository.CurrentRemote.HasValue;
         }
     }
 }
