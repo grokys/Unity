@@ -124,6 +124,11 @@ namespace GitHub.Unity
             GUILayout.EndScrollView();
         }
 
+        public override bool IsBusy
+        {
+            get { return isBusy; }
+        }
+
         private void HandleEnterPressed()
         {
             if (Event.current.type != EventType.KeyDown)

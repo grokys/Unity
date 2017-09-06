@@ -45,6 +45,7 @@ namespace GitHub.Unity
         [NonSerialized] private int selectionIndex;
         [NonSerialized] private bool updated = true;
         [NonSerialized] private bool useScrollTime;
+        [NonSerialized] private bool isBusy;
 
         [SerializeField] private Vector2 detailsScroll;
         [SerializeField] private Object historyTarget;
@@ -55,7 +56,6 @@ namespace GitHub.Unity
 
         [SerializeField] private ChangesetTreeView changesetTree = new ChangesetTreeView();
         [SerializeField] private List<GitLogEntry> history = new List<GitLogEntry>();
-        [SerializeField] private bool isBusy;
         [SerializeField] private string currentRemote;
         [SerializeField] private bool isPublished;
 
@@ -116,6 +116,11 @@ namespace GitHub.Unity
         {
 
             OnEmbeddedGUI();
+        }
+
+        public override bool IsBusy
+        {
+            get { return isBusy; }
         }
         private void AttachHandlers(IRepository repository)
         {

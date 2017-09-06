@@ -142,6 +142,11 @@ namespace GitHub.Unity
                 ActiveView.OnSelectionChange();
         }
 
+        public override bool IsBusy
+        {
+            get { return false; }
+        }
+
         public override void Refresh()
         {
             base.Refresh();
